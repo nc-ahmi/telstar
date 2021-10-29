@@ -1,0 +1,59 @@
+
+<form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)" >
+    <div class="form-style center-box">
+    <h1 class="box-title">Send a parcel</h1>
+    <label for="exampleDataList" class="form-label">Start Destination</label>
+    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." name="startDestination" ngModel required>
+    <datalist id="datalistOptions">
+      <option *ngFor="let number of options" value="{{number}}">
+    </datalist>
+
+    <label for="exampleDataList" class="form-label">Target Destination</label>
+    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." name="targetDestination" ngModel>
+    <datalist id="datalistOptions">
+      <option *ngFor="let number of options" value="{{number}}">
+    </datalist>
+
+    <label for="startDate" class="form-label">Date</label>
+    <input class="form-control" type="date" id="startDate" name="startDate" ngModel >
+    <label for="startTime" class="form-label">Time</label>
+    <input class="form-control" type="time"  timeFormat="HH:mm" id="startTime" name="startTime" ngModel>
+
+    <label for="exampleDataList" class="form-label">Parcel Type</label>
+    <input class="form-control" list="datalistType" id="exampleDataList" name="parcelType" placeholder="Type to search..." ngModel>
+    <datalist id="datalistType">
+      <option *ngFor="let type of types" value="{{type}}">
+    </datalist>
+
+    <div class="short-input-container">
+      <div class="input-container">
+      <label for="weight" class="form-label">Weight:</label>
+      <input class="form-control short-input" type="number" id="weight" name="weight" min="1" ngModel>
+    </div>
+
+    <div class="input-container">
+      <label for="height" class="form-label">Height:</label>
+      <input class="form-control short-input" type="number" id="height" name="height" min="1" ngModel>
+    </div>
+
+    <div class="input-container">
+      <label for="width" class="form-label">Width:</label>
+      <input class="form-control short-input" type="number" id="width" name="width" min="1" ngModel>
+    </div>
+    <div class="input-container">
+      <label for="Length" class="form-label">Length:</label>
+      <input class="form-control short-input" type="number" id="lenth" name="length" min="1" ngModel>
+    </div>
+    <br>
+
+    <div class="input-container">
+      <label for="myCheck" class="form-label">Signed:</label>
+      <br>
+      <input type="checkbox" id="myCheck" name="isSigned" [(ngModel)]="checkbox" >
+     </div>
+
+    </div>
+
+    <input class="btn btn-primary telstar-button" type="submit" value="Check Prices">
+  </div>
+  </form>

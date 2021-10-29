@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f9f9f9;
+}
+
+.center-box {
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  margin: auto;
+  width: 50%;
+  padding: 20px;
+  padding-top: 10px;
+  background-color: #fff;
+}
+
+.box-title {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
+.custom-input {
+  display: block;
+  height: calc(1.5 em + 0.75 rem + 2 px);
+  padding: 0.375 rem 0.75 rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1 px solid #ced4da !important;
+  border-radius: 0.25 rem !important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.telstar-button{
+  background-color: #931621 !important;
+  border-color: #8E151F;
+}
+
+.box-frame{
+  height: 75px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+  0 1px 3px 0 rgb(0 0 0 / 12%);
+border-radius: 4px;
+}

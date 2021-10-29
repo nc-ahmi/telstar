@@ -1,0 +1,43 @@
+.center {
+  margin: auto;
+  width: 70%;
+  border: 1px solid grey;
+  padding: 10px;
+}
+
+.body {
+  background-color: white;
+}
+.button-color {
+  background-color: #931621;
+  color: white;
+}
+
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  background-color: #931621 !important;
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+  background-color: #Cf1212 !important;
+  border-color: #931621 !important;
+}
+
+ngb-pagination ::ng-deep a {
+  color: white !important;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: #931621;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0 #931621;
+}
+
+ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0 #931621;
+}
+.center-box {
+  display: grid;
+  width: 70%;
+}

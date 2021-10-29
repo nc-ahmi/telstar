@@ -1,0 +1,26 @@
+*{
+  color: white;
+}
+
+.toolbar {
+  background-color: #931621;
+  margin-bottom: 30px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+a:hover{
+  color: white;
+}
+
+.buttons {
+  margin-left: auto;
+  padding: 14px;
+  text-decoration: none;
+  background-color: #931621;
+  border: 0px;
+}
+
+.buttons a{
+  margin-left: 10px;
+}

@@ -1,0 +1,33 @@
+<div class="center-box">
+  <div class="box-title">Register</div> <br/>
+  <form [formGroup]="register">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Email address</label>
+      <input type="email" class="form-control" formControlName="email" name="email" placeholder="name@example.com">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" name="firstName" placeholder="Enter your first name...">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName" name="lastName" placeholder="Enter your last name...">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Password</label>
+      <input type="password" class="form-control" formControlName="password" name="password" placeholder="Enter your password...">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Repeat password</label>
+      <input type="password" class="form-control" formControlName="repeatPassword" name="repeatPassword" placeholder="Repeat password...">
+    </div>
+  </form>
+  <div class="wrapper">
+    <button class="button btn btn-primary telstar-button" routerLink="/login">
+        Back
+    </button>
+    <button class="button btn btn-primary telstar-button" routerLink="/send-parcel">
+        Register
+    </button>
+  </div>
+</div>

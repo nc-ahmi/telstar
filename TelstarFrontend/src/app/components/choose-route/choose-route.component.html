@@ -1,0 +1,62 @@
+<div class="center-box">
+  <h1>Choose Route</h1>
+
+  <div *ngFor="let route of routes">
+    <h3>Optimal Route</h3>
+    <div class="route-info-container box-frame">
+      <div class="labelinput">
+        <label for="destinations" class="form-label">Route</label>
+        <div name="destinations" class="form-control route-info-item">
+          {{ route.startDestination }} - {{ route.targetDestination }}
+        </div>
+      </div>
+
+      <div class="labelinput">
+        <label for="shippingdate" class="form-label">Shipping Date</label>
+        <div name="shippingdate" class="form-control route-info-item">
+          {{ route.shippingDate }}
+        </div>
+      </div>
+
+      <div class="labelinput">
+        <label for="parceltype" class="form-label">Parcel Type</label>
+        <div name="parceltype" class="form-control route-info-item">
+          {{ route.parcelType }}
+        </div>
+      </div>
+      <div class="labelinput">
+        <label for="traveltime" class="form-label">Travel Time</label>
+        <div name="traveltime" class="form-control route-info-item">
+          {{ route.travelTime }}h
+        </div>
+      </div>
+      <div class="labelinput">
+        <label for="price" class="form-label">Price</label>
+        <div name="price" class="form-control route-info-item">
+          ${{ route.price }}
+        </div>
+      </div>
+
+      <a
+        routerLink="/checkout"
+        class="btn btn-primary telstar-button"
+        router
+        role="button"
+        >Link</a
+      >
+    </div>
+
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+      class="accordion-style"
+    >
+      <mat-expansion-panel-header class="acc-title">
+        <mat-panel-title> Journey </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul *ngFor="let routeStop of route.route">
+        <li>{{ routeStop }}</li>
+      </ul>
+    </mat-expansion-panel>
+  </div>
+</div>

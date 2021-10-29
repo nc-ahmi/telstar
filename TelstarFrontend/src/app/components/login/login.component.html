@@ -1,0 +1,27 @@
+<div class="center-box">
+  <div class="imageStyle">
+    <img src="https://telstarlogistics.typepad.com/photos/uncategorized/stickerlogo.jpg" width="200" height="200">
+  </div>
+
+  <form [formGroup]="login">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Email address</label>
+      <input type="email" class="form-control" formControlName="email" name="email" placeholder="name@example.com">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Password</label>
+      <input type="password" class="form-control" formControlName="password" name="password" placeholder="Enter your password">
+    </div>
+    <a class="buttons" routerLink="/sendAnEmail">
+      Forgot your password?
+    </a>
+  </form>
+  <div class="wrapper">
+    <button class="btn btn-primary telstar-button button" routerLink="/register">
+        Register
+    </button>
+    <button class="btn btn-primary telstar-button button" routerLink="/send-parcel">
+        Login
+    </button>
+  </div>
+</div>
