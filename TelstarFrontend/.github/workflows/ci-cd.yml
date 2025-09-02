@@ -36,7 +36,7 @@ jobs:
       # 5. Build the application for production
       # The base-href is important for GitHub Pages deployment
       - name: Build for Production
-        run: npm run build -- --configuration=production --base-href /${{ github.event.repository.name }}/
+        run: npm run build -- --configuration=production --base-href /TelstarFrontend/
 
       # 6. Run unit tests
       # The flags --watch=false and --browsers=ChromeHeadless are essential for CI environments
@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: angular-build-artifact
-          path: dist/telstar/TelstarFrontend
+          path: dist/TelstarFrontend
 
   # This job deploys the application to GitHub Pages
   deploy_to_gh_pages:
@@ -81,7 +81,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # The artifact is uploaded from the current directory because download-artifact extracts here
-          path: '.'
+          path: dist/TelstarFrontend
 
       # 4. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
