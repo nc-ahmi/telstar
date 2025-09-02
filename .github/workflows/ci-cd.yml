@@ -64,6 +64,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: angular-build-artifact
+          path: angular-build-artifact
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
