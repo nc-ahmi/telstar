@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: angular-build-artifact
-          path: dist/${{ github.event.repository.name }} # Adjust this path if your build output is different
+          path: dist/telstar/TelstarFrontend
 
   # This job deploys the application to GitHub Pages
   deploy_to_gh_pages:
