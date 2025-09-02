@@ -30,9 +30,8 @@ jobs:
       - name: Cache Node Modules
         uses: actions/cache@v4
         with:
-          # Note: The path is now relative to the repo root for the cache key
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/TelstarFrontend/package-lock.json') }}
+          path: TelstarFrontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('TelstarFrontend/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -49,8 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: angular-build-artifact
-          # The path is relative to the repo root.
-          path: TelstarFrontend/dist/TelstarFrontend
+          path: dist/TelstarFrontend
 
   deploy_to_gh_pages:
     name: Deploy to GitHub Pages
@@ -69,13 +67,18 @@ jobs:
         with:
           name: angular-build-artifact
 
+      - name: Move Build Output
+        run: |
+          rm -rf TelstarFrontend
+          mv dist TelstarFrontend
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: TelstarFrontend
 
       - name: Deploy to GitHub Pages
         id: deployment
