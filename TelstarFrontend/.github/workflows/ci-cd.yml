@@ -1,0 +1,89 @@
+# .github/workflows/angular-ci-cd.yml
+
+name: Angular CI/CD Build and Deploy
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push events but only for the main branch
+  push:
+    branches: [ main ]
+  # Triggers the workflow on pull request events against the main branch
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # This job builds and tests the Angular application
+  build_and_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js environment
+      # Angular 12.2.12 is compatible with Node 14.15.0+
+      - name: Setup Node.js v14
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+
+      # 4. Install dependencies using npm ci for faster, reliable installs
+      - name: Install Dependencies
+        run: npm ci
+
+      # 5. Build the application for production
+      # The base-href is important for GitHub Pages deployment
+      - name: Build for Production
+        run: npm run build -- --configuration=production --base-href /${{ github.event.repository.name }}/
+
+      # 6. Run unit tests
+      # The flags --watch=false and --browsers=ChromeHeadless are essential for CI environments
+      - name: Run Unit Tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+      # 7. Upload the build artifact to be used in the deploy job
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-build-artifact
+          path: dist/${{ github.event.repository.name }} # Adjust this path if your build output is different
+
+  # This job deploys the application to GitHub Pages
+  deploy_to_gh_pages:
+    name: Deploy to GitHub Pages
+    # This job runs only after build_and_test has succeeded
+    needs: build_and_test
+    # This condition ensures the job only runs on a push to the main branch, not on pull requests
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    # Grant permissions for the GITHUB_TOKEN to deploy to GitHub Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      # 1. Download the build artifact from the previous job
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: angular-build-artifact
+
+      # 2. Setup Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 3. Upload artifact for deployment
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The artifact is uploaded from the current directory because download-artifact extracts here
+          path: '.'
+
+      # 4. Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
