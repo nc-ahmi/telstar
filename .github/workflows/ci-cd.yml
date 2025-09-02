@@ -1,0 +1,82 @@
+# .github/workflows/ci-cd.yml
+
+name: Angular CI/CD Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_and_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    # This is the key change: tells the job to run all steps inside this folder
+    defaults:
+      run:
+        working-directory: ./TelstarFrontend
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v14
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        with:
+          # Note: The path is now relative to the repo root for the cache key
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/TelstarFrontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build for Production
+        run: npm run build -- --configuration=production --base-href /telstar/
+
+      - name: Run Unit Tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-build-artifact
+          # The path is relative to the repo root.
+          path: TelstarFrontend/dist/TelstarFrontend
+
+  deploy_to_gh_pages:
+    name: Deploy to GitHub Pages
+    needs: build_and_test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: angular-build-artifact
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
