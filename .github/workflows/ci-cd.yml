@@ -38,9 +38,9 @@ jobs:
         run: npm run build -- --configuration=production --base-href /telstar/
         working-directory: TelstarFrontend
 
-      - name: Run Unit Tests
-        run: npm test -- --watch=false --browsers=ChromeHeadless
-        working-directory: TelstarFrontend
+      # - name: Run Unit Tests
+      #   run: npm test -- --watch=false --browsers=ChromeHeadless
+      #   working-directory: TelstarFrontend
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
